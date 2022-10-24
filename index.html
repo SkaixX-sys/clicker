@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{margin: 0px;overflow: hidden;}
+        html {
+            background-image: url(https://illustrators.ru/uploads/illustration/image/1105682/%D0%B7%D0%B0%D0%B4%D0%BD%D0%B8%D0%B9_%D1%84%D0%BE%D0%BD.jpg);
+            font-family: 'Courier New', Courier, monospace;
+        }
+        body {
+            padding: 10% 0% 100% 0%;
+            background-color: rgba(0, 0, 0, 0.7);
+            height: 100%;
+            width: 100%;
+        }
+
+        .clicker {
+            border: 1px solid white;
+            user-select: none;
+            cursor: pointer;
+            display: block;
+            width: 10%;
+            padding: 2% 1% 2% 1%;
+            text-align: center;
+            margin: 0 auto;
+            margin-bottom: 10px;
+            color: rgb(167, 159, 159);
+            font-size: 2.5em;
+        }
+
+        .money {
+            border: 1px solid white;
+            user-select: none;
+            display: block;
+            width: 3%;
+            padding: 2% 10% 2% 10%;
+            text-align: center;
+            margin: 0 auto;
+            margin-bottom: 10px;
+            color: rgb(167, 159, 159);
+            font-size: 2em;
+            text-decoration: underline;
+        }
+
+        .clicker:active {
+            color: rgb(170, 124, 124);
+            border: 1px solid rgb(170, 124, 124);
+        }
+
+        .shop {
+            margin: 0 auto;
+            display: flex;
+            width: 100%;
+            height: 200px;
+            justify-content: space-around;
+            align-items: center;
+            color: white;
+            user-select: none;
+
+        }
+
+        .shop div {
+            border: 1px solid white;
+            padding: 1%;
+            font-size: 1.2em;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .shop div:active {
+            color: rgb(170, 124, 124);
+            border: 1px solid rgb(170, 124, 124);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="clicker">punch</div>
+    <div class="money">0</div>
+    <div class="shop">
+        <div class="item1">
+            <p>Деревянный меч(+3 УРН)</p>
+            <p>за 30 монет</p>
+        </div>
+        <div class="item2">
+            <p>Каменный меч(+6 УРН)</p>
+            <p>за 60 монет</p>
+        </div>
+        <div class="item3">
+            <p>Золотой меч(+12 УРН)</p>
+            <p>за 120 монет</p>
+        </div>
+        <div class="item4">
+            <p>Железный меч(+24 УРН)</p>
+            <p>за 240 монет</p>
+        </div>
+        <div class="item5">
+            <p>Алмaзный меч(+48 УРН)</p>
+            <p>за 480 монет</p>
+        </div>
+    </div>
+
+    <script>
+
+        const clicker = document.querySelector('.clicker');
+        const money = document.querySelector('.money');
+        const woodenSword = document.querySelector('.item1');
+        const stoneSword = document.querySelector('.item2');
+        const goldenSword = document.querySelector('.item3');
+        const ironSword = document.querySelector('.item4');
+        const diamondSword = document.querySelector('.item5');
+        let i = 480;
+        let bonus = 0;
+        money.innerHTML = i;
+        function punching() {
+            i++;
+
+            woodenSword.addEventListener('click', () => {
+            if (i >= 30) { 
+                i = i - 30; 
+                money.innerHTML = i;
+                bonus += 3; 
+            }
+        });
+            stoneSword.addEventListener('click', () => {
+            if (i >= 60) { 
+                i = i - 60; 
+                money.innerHTML = i;
+                bonus += 6; 
+            }
+        });
+            goldenSword.addEventListener('click', () => {
+            if (i >= 120) { 
+                i = i - 120; 
+                money.innerHTML = i;
+                bonus += 12; 
+            }
+        });
+            ironSword.addEventListener('click', () => {
+            if (i >= 240) { 
+                i = i - 240; 
+                money.innerHTML = i;
+                bonus += 24; 
+            }
+        });
+            diamondSword.addEventListener('click', () => {
+            if (i >= 480) { 
+                i = i - 480; 
+                money.innerHTML = i;
+                bonus += 48; 
+            }
+        });
+            i += bonus;
+        
+        money.innerHTML = i;
+
+        }
+
+        
+
+        clicker.addEventListener('click', () => punching());
+    </script>
+</body>
+
+</html>
