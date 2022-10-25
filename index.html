@@ -19,7 +19,7 @@
             width: 100%;
         }
 
-        .clicker {
+        .clicker,.reset {
             border: 1px solid white;
             user-select: none;
             cursor: pointer;
@@ -32,7 +32,14 @@
             color: rgb(167, 159, 159);
             font-size: 2.5em;
         }
-
+        .reset {
+            background-color: rgb(214, 188, 188,0.1);
+            width: 25%;
+        }
+        .reset:hover {
+            background-color: brown;
+            transition: .2s;
+        }
         .money {
             border: 1px solid white;
             user-select: none;
@@ -76,32 +83,62 @@
             color: rgb(170, 124, 124);
             border: 1px solid rgb(170, 124, 124);
         }
+        .header {
+            width: 100%;
+            height: 100px;
+        }
+        .menu {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-direction: column;
+            float: right;
+            margin-right: 15px;
+            border: 1px solid white;
+            padding: 5px;
+        }
+        span {
+            border: 1px solid white;
+            background-color: white;
+            border-radius: 100px;
+            width: 26px;
+            height: 1px;
+        }
     </style>
 </head>
 
 <body>
-
+    <div class="header">
+        <div class="menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
     <div class="clicker">punch</div>
     <div class="money">0</div>
+    <div class="reset">Начать сначала</div>
     <div class="shop">
         <div class="item1">
-            <p>Деревянный меч(+3 УРН)</p>
+            <p>(+3 УРН)</p>
             <p>за 30 монет</p>
         </div>
         <div class="item2">
-            <p>Каменный меч(+6 УРН)</p>
+            <p>(+6 УРН)</p>
             <p>за 60 монет</p>
         </div>
         <div class="item3">
-            <p>Золотой меч(+12 УРН)</p>
+            <p>(+12 УРН)</p>
             <p>за 120 монет</p>
         </div>
         <div class="item4">
-            <p>Железный меч(+24 УРН)</p>
+            <p>(+24 УРН)</p>
             <p>за 240 монет</p>
         </div>
         <div class="item5">
-            <p>Алмaзный меч(+48 УРН)</p>
+            <p>(+48 УРН)</p>
             <p>за 480 монет</p>
         </div>
     </div>
@@ -115,12 +152,19 @@
         const goldenSword = document.querySelector('.item3');
         const ironSword = document.querySelector('.item4');
         const diamondSword = document.querySelector('.item5');
-        let i = 480;
+        const reset = document.querySelector('.reset');
+        
+        let i = localStorage.getItem('test');
+        money.innerHTML = localStorage.getItem('test');
         let bonus = 0;
-        money.innerHTML = i;
+        
         function punching() {
             i++;
-
+            i += bonus;
+            localStorage.setItem('test', i);
+            money.innerHTML = localStorage.getItem('test');
+            
+        }
             woodenSword.addEventListener('click', () => {
             if (i >= 30) { 
                 i = i - 30; 
@@ -156,14 +200,16 @@
                 bonus += 48; 
             }
         });
-            i += bonus;
-        
-        money.innerHTML = i;
-
-        }
-
-        
-
+        reset.addEventListener('mouseenter',()=> {
+            reset.innerHTML = 'ТЫ УВЕРЕН?';
+        });
+        reset.addEventListener('mouseout',()=> {
+            reset.innerHTML = 'Начать сначала';
+        });
+        reset.addEventListener('click',()=>{
+            delete localStorage.test;
+            window.location.reload();
+        });
         clicker.addEventListener('click', () => punching());
     </script>
 </body>
